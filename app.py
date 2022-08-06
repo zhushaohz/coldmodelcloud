@@ -15,8 +15,8 @@ class ColdModel(Resource):
     """
 
     def get(self):
-        print('Hello world of RESTful api!')
-        return {'hello': 'zzdeworld'}
+        print('This is api for humancoldmodel!')
+        return {'hello': 'coldmodelcloud'}
 
     def post(self):
         mydata = request.form['data']
