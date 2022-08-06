@@ -8,9 +8,9 @@ app = Flask(__name__)
 api = Api(app)
 
 
-class HelloWorld(Resource):
+class ColdModel(Resource):
     """
-    api: /api/HelloWorld
+    api: /api/ColdModel
     restful 接口调用测试
     """
 
@@ -23,7 +23,7 @@ class HelloWorld(Resource):
         return {'hello': mydata}
 
 
-api.add_resource(HelloWorld, '/')
+api.add_resource(ColdModel, '/')
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)
