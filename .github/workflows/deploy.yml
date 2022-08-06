@@ -1,0 +1,25 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: deploy
+        uses: easingthemes/ssh-deploy@v2.2.11
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_KEY }}
+          ARGS: '-avz --delete'
+          SOURCE: ''
+          REMOTE_HOST: ${{ secrets.SERVER_HOST }}
+          REMOTE_USER: ${{ secrets.USER_NAME }}
+          TARGET: ${{ secrets.TARGET }}
