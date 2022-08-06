@@ -11,22 +11,16 @@ on:
 
 jobs:
   deploy:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        node-version: [ 16.x ]
-        os: [ ubuntu-latest ]
-      fail-fast: false
+    runs-on: ubuntu-latest
 
     steps:
       - name: deploy
-        uses: easingthemes/ssh-deploy@v2.2.11
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_KEY }}
-          ARGS: '-rltgoDzvO'
-          SOURCE: ''
-          REMOTE_HOST: ${{ secrets.SERVER_HOST }}
-          REMOTE_USER: ${{ secrets.USER_NAME }}
-          TARGET: /home/ubuntu/coldmodelcloud/
+        run: scp -i ${{ secrets.SERVER_PRIVATE_KEY }} /* ${{ secrets.USER_NAME }}@${{ secrets.SERVER_HOST }}:/home/ubuntu/coldmodelcloud/
+#        env:
+#          SSH_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_KEY }}
+#          ARGS: '-rltgoDzvO'
+#          SOURCE: ''
+#          REMOTE_HOST: ${{ secrets.SERVER_HOST }}
+#          REMOTE_USER: ${{ secrets.USER_NAME }}
+#          TARGET: /home/ubuntu/coldmodelcloud/
 #          ${{ secrets.TARGET }}
