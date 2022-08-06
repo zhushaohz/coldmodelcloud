@@ -11,7 +11,13 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node-version: [ 16.x ]
+        os: [ ubuntu-latest ]
+      fail-fast: false
 
     steps:
       - name: deploy
@@ -19,7 +25,8 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_KEY }}
           ARGS: '-rltgoDzvO'
-          SOURCE: '*'
+          SOURCE: ''
           REMOTE_HOST: ${{ secrets.SERVER_HOST }}
           REMOTE_USER: ${{ secrets.USER_NAME }}
-          TARGET: ${{ secrets.TARGET }}
+          TARGET: /home/ubuntu/coldmodelcloud/
+#          ${{ secrets.TARGET }}
